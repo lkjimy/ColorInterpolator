@@ -1,0 +1,23 @@
+{
+  "name": "colorinterpolator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "colorInterpolator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server -p 4444"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lkjimy/ColorInterpolator.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lkjimy/ColorInterpolator/issues"
+  },
+  "homepage": "https://github.com/lkjimy/ColorInterpolator#readme",
+  "devDependencies": {
+    "http-server": "^0.11.1"
+  }
+}
