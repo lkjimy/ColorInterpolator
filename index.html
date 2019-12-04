@@ -6,8 +6,31 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ColorInterpolator</title>
   <script src="./colorInterpolator.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      width: 100vw;
+      transition: 1s ease;
+    }
+  </style>
 </head>
 <body>
 
+  <script>
+      var colors = _obtainArrayOfInterpolatedColors('#0073ff', '#ff9d00', 10)
+
+      var i = 0
+
+      setInterval(() => {
+        if (i >= colors.length) {
+          i = 0
+        }
+        let color = colors[i]
+        document.body.style.background = color
+        i++
+      }, 1000)
+    </script>
 </body>
 </html>

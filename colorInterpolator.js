@@ -1,32 +1,41 @@
-// Converts a #ffffff hex string into an [r,g,b] array
-var h2r = function (hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? [
-    parseInt(result[1], 16),
-    parseInt(result[2], 16),
-    parseInt(result[3], 16)
-  ] : null;
-};
+/**
+ * Converts an Hex string into an [r,g,b] array
+ * @param {String} hex | String containing an hex color
+ */
+function h2r (hex) {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
 
-// Inverse of the above
-var r2h = function (rgb) {
-  return "#" + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1);
-};
+  return result ? [ parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16) ] : null
+}
 
-// Interpolates two [r,g,b] colors and returns an [r,g,b] of the result
-// Taken from the awesome ROT.js roguelike dev library at
-var _interpolateColor = function (color1, color2, factor) {
+/**
+ * Converts an [r,g,b] array into an Hex string
+ * @param {Array} rgb | Array containing Red, Green and Blue values between 0 and 255
+ */
+function r2h (rgb) {
+  return "#" + ((1 << 24) + (rgb[0] << 16) + (rgb[1] << 8) + rgb[2]).toString(16).slice(1)
+}
+
+/**
+ *
+ * @param {*} color1
+ * @param {*} color2
+ * @param {*} factor
+ */
+function _interpolateColor (color1, color2, factor) {
   if (arguments.length < 3) {
-    factor = 0.5;
+    factor = 0.5
   }
-  var result = color1.slice();
+
+  var result = color1.slice()
   for (var i = 0; i < 3; i++) {
-    result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]));
+    result[i] = Math.round(result[i] + factor * (color2[i] - color1[i]))
   }
-  return result;
+
+  return result
 };
 
-var rgb2hsl = function (color) {
+function rgb2hsl (color) {
   var r = color[0] / 255;
   var g = color[1] / 255;
   var b = color[2] / 255;
@@ -57,7 +66,7 @@ var rgb2hsl = function (color) {
   return [h, s, l]
 }
 
-var hsl2rgb = function (color) {
+function hsl2rgb (color) {
   var l = color[2]
 
   if (color[1] == 0) {
@@ -73,7 +82,7 @@ var hsl2rgb = function (color) {
       return p;
     }
 
-    var s = color[1];
+    var s = color[1]
     var q = (l < 0.5 ? l * (1 + s) : l + s - l * s)
     var p = 2 * l - q
     var r = hue2rgb(p, q, color[0] + 1 / 3)
@@ -83,7 +92,7 @@ var hsl2rgb = function (color) {
   }
 }
 
-var _interpolateHSL = function (color1, color2, factor) {
+function _interpolateHSL (color1, color2, factor) {
   if (arguments.length < 3) {
     factor = 0.5
   }
@@ -95,12 +104,12 @@ var _interpolateHSL = function (color1, color2, factor) {
   return hsl2rgb(hsl1)
 }
 
-var _obtainArrayOfInterpolatedColors = function (color1, color2, step) {
-  let scol = h2r('#5e4fa2')
-  let ecol = h2r('#f79459')
+function _obtainArrayOfInterpolatedColors (color1, color2, step) {
+  let scol = h2r(color1)
+  let ecol = h2r(color2)
   var fn = '_interpolateColor'
 
-  var factorStep = 1 / (step - 1);
+  var factorStep = 1 / (step - 1)
   let arrayOfColors = []
   for (i = 0; i < step; i++) {
     let icol = window[fn](scol, ecol, factorStep * i)

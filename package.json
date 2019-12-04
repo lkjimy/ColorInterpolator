@@ -5,7 +5,7 @@
   "main": "colorInterpolator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "http-server -p 4444"
+    "dev": "live-server --port=4444 --host=0.0.0.0"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,8 @@
     "url": "https://github.com/lkjimy/ColorInterpolator/issues"
   },
   "homepage": "https://github.com/lkjimy/ColorInterpolator#readme",
-  "devDependencies": {
-    "http-server": "^0.11.1"
+  "devDependencies": {},
+  "dependencies": {
+    "live-server": "^1.2.1"
   }
 }
